@@ -76,7 +76,38 @@ class Employee(User):
         Raises:
             ValueError: the raise amount was not valid"""
 
+        if amount > 0 and isinstance(amount, (int, float)):
+            self._salary += amount
+            return True
+        else:
+            raise ValueError("Raise amount must be a positive number")
 
 
+class Customer(User):
+    """Represents a bank customer.
+
+    So far there is only one type of customer. Customers have an ID used as key for services and accounts.
+
+    Attributes:
+        customer_id: a string of the customer's id
+    """
+    def __init__(self, customer_id, first_name, last_name, date_of_birth, email):
+        super().__init__(first_name, last_name, date_of_birth, email)
+        self.customer_id = customer_id
 
 
+class Account:
+    """Parent for any future type of bank account.
+
+    Stores all the common attributes and methods shared by every type of bank account. Currently there are only two
+    subclasses: checking, and savings.
+
+    Attributes:
+        balance: a float of the account balance.
+        interest_rate: a float of the account's interest rate.
+        account_number: a string of the account number.
+        customer_id: a string of the customer's id
+    """
+
+    def __init__(self, balance, interest_rate, account_number, customer_id):
+        pass

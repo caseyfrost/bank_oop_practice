@@ -18,7 +18,7 @@ class Account:
         self.customer_id = customer_id
 
     def make_deposit(self, amount):
-        """Makes an 'amount' sized deposit in the account.
+        """Makes an 'amount' sized increase to account balance.
 
         Args:
             amount: int or float of the deposit amount.
@@ -34,6 +34,27 @@ class Account:
             return True
         else:
             raise ValueError("Raise amount must be a positive number")
+
+    def withdraw(self, amount):
+        """Reduces the account balance by amount.
+
+        Args:
+            amount: int or float to withdraw.
+
+        Returns:
+            bool True if completes successfully.
+
+        Raises:
+            ValueError if amount is not a positive number."""
+
+        if self.check_num_pos(amount):
+            self.balance -= amount
+            return True
+        else:
+            raise ValueError('Withdrawal amount must be a positive number')
+
+    def print_balance(self):
+        return f"The current account balance is: {self.balance}"
 
     @staticmethod
     def check_num_pos(num):

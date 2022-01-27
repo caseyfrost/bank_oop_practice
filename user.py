@@ -24,7 +24,7 @@ class User:
 
     @social.setter
     def social(self, last_4):
-        if len(last_4) == 4 and last_4.isdigit():
+        if self.check_num_pos(last_4):
             self._social = last_4
         else:
             self._social = ''
@@ -32,3 +32,17 @@ class User:
 
     def full_name(self):
         return f'{self.first_name} {self.last_name}'
+
+    @staticmethod
+    def check_num_pos(num):
+        """Checks if arg is a positive number
+
+        Args:
+            num: any type of python object
+
+        Returns:
+            Bool True if num is positive integer, or False if not"""
+        if isinstance(num, (int, float)):
+            if num > 0:
+                return True
+

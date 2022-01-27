@@ -24,8 +24,9 @@ class Employee(User):
 
     @salary.setter
     def salary(self, slry):
-        if slry > 0 and isinstance(slry, (int, float)):
-            self._salary = slry
+        if isinstance(slry, (int, float)):
+            if slry > 0:
+                self._salary = slry
         else:
             raise ValueError('Salary must be a positive number')
 
@@ -41,7 +42,7 @@ class Employee(User):
         Raises:
             ValueError: the raise amount was not valid"""
 
-        if amount > 0 and isinstance(amount, (int, float)):
+        if self.check_num_pos(amount):
             self._salary += amount
             return True
         else:

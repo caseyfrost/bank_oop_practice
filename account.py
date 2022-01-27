@@ -18,7 +18,32 @@ class Account:
         self.customer_id = customer_id
 
     def make_deposit(self, amount):
-        """Makse an 'amount' sized deposit in the account.
+        """Makes an 'amount' sized deposit in the account.
 
         Args:
-            amount: int or float """
+            amount: int or float of the deposit amount.
+
+        Returns:
+            bool True if method finishes successfully.
+
+        Raises:
+            ValueError if amount is not a positive number."""
+
+        if self.check_num_pos(amount):
+            self.balance += amount
+            return True
+        else:
+            raise ValueError("Raise amount must be a positive number")
+
+    @staticmethod
+    def check_num_pos(num):
+        """Checks if arg is a positive number
+
+        Args:
+            num: any type of python object
+
+        Returns:
+            Bool True if num is positive integer, or False if not"""
+        if isinstance(num, (int, float)):
+            if num > 0:
+                return True

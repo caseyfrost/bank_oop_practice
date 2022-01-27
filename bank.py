@@ -110,4 +110,9 @@ class Account:
     """
 
     def __init__(self, balance, interest_rate, account_number, customer_id):
-        pass
+        self.balance = balance
+        self.interest_rate = interest_rate
+        self.account_number = account_number
+        self.customer_id = customer_id
+
+

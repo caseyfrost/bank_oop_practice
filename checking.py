@@ -23,7 +23,7 @@ class CheckingAccount(Account):
             True if the function finishes without error
 
         Raises:
-            ValueError if amount arg is not a postive int or float
+            ValueError if amount arg is not a positive int or float
         """
         if self.check_num_pos(amount):
             self.withdraw(amount)
@@ -39,7 +39,8 @@ class CheckingAccount(Account):
 
         Returns:
             True if an overdraft fee is charged.
-            False if the balance is positive"""
+            False if the balance is positive
+        """
 
         if self.balance < 0:
             self.balance -= self.overdraft_fee

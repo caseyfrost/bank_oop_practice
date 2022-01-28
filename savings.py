@@ -1,4 +1,9 @@
 from account import Account
 
+
 class SavingsAccount(Account):
-    pass
+    """Creates a savings account object with limited number of withdrawls
+
+    Attributes:
+        max_withdrawals: int of allowable number of withdrawals
+    """

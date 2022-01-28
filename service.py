@@ -11,5 +11,5 @@ class Service:
         self.customer_id = customer_id
 
     def bill_customer(self, amount):
-        """After db is set up will send a bill to the customer's address"""
+        """After db is set up a query will be run to reduce the customer's balance by the amount"""
 

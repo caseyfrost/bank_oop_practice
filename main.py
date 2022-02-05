@@ -3,8 +3,7 @@ from employee import Employee
 from checking import CheckingAccount
 from savings import SavingsAccount
 from insurance import Insurance
-import psycopg2
-import sqlalchemy
+from sql_functions import insert_customer
 
 
 # 1. create customer 2. create employee 3. user login 4. customer login 5. open savings/checking/insurance
@@ -19,6 +18,8 @@ def bank_ui():
         return False
     elif step1 == '1':
         print('Creating account')
+        id = insert_customer('test', 'test', 'test@gmail.com', 'test', 'test')
+        print(id)
         return False
     elif step1 == '2':
         print('Create employee account')

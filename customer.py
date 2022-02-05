@@ -9,6 +9,6 @@ class Customer(User):
     Attributes:
         customer_id: a string of the customer's id
     """
-    def __init__(self, customer_id, first_name, last_name, date_of_birth, email):
-        super().__init__(first_name, last_name, date_of_birth, email)
+    def __init__(self, first_name, last_name, email, password, social, customer_id=''):
+        super().__init__(first_name, last_name, email, password, social)
         self.customer_id = customer_id

@@ -2,7 +2,7 @@ import psycopg2
 from config import config
 
 
-def connect(query=''):
+def connect(sql, values):
     """ Connect to the PostgreSQL database server """
     conn = None
     try:
@@ -18,7 +18,7 @@ def connect(query=''):
 
         # execute a statement
         print('PostgreSQL database version:')
-        cur.execute(query)
+        cur.execute('SELECT version()')
 
         # display the PostgreSQL database server version
         db_version = cur.fetchone()

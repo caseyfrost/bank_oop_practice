@@ -45,30 +45,3 @@ class Customer(User):
         self.customer_id = customer_id
 
         return self.customer_id
-
-    def cust_login(self):
-        sql = """SELECT id
-                FROM "Customer"
-                WHERE email = (%s) and password = (%s)"""
-        conn = None
-        customer_id = None
-        try:
-            # read database configuration
-            params = config()
-            # connect to the PostgreSQL database
-            conn = psycopg2.connect(**params)
-            # create a new cursor
-            cur = conn.cursor()
-            # execute the INSERT statement
-            cur.execute(sql, (self.email, self.password))
-            # get the generated id back
-            customer_id = cur.fetchone()[0]
-            # close communication with the database
-            cur.close()
-        except (Exception, psycopg2.DatabaseError) as error:
-            print(error)
-        finally:
-            if conn is not None:
-                conn.close()
-
-        return customer_id

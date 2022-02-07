@@ -6,8 +6,8 @@ class User:
     Attributes:
         first_name: a string of the user's first name.
         last_name: a string of the user's last name.
-        date_of_birth: a string of the user's dob.
         email: a string of the user's email.
+        password: password used to login
         social: property, a string of the last 4 digits of the user's social. Defaults to empty string.
     """
 

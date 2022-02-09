@@ -1,5 +1,7 @@
 import psycopg2
 from config import config
+from checking import CheckingAccount
+from savings import SavingsAccount
 
 
 def new_cust_prompt():
@@ -54,3 +56,14 @@ def login(email, password, table):
             conn.close()
 
     return customer_vals
+
+
+def check_type(type):
+    if int(type) == 1:
+        return 'SavingsAccount', 
+    elif int(type) == 2:
+        return 'CheckingAccount'
+    elif int(type) == 3:
+        return 'Exit'
+    return False
+    

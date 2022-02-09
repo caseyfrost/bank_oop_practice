@@ -78,16 +78,16 @@ def step_2(account):
         deposit = input('Enter initial deposit amount: ')
         if act_type == 'SavingsAccount':
             act = SavingsAccount(customer_id=account.customer_id)
-            # act.insert_account(act_type)
-            # act.make_deposit(deposit)
-            print(f'Current balance: {act.balance}')
+            act.insert_account()
+            act.make_deposit(deposit)
+            print(f'Successfully created savings account. Current balance: {act.balance}')
             return step_2(account)
         elif act_type == 'CheckingAccount':
             print(f'Creating checking for customer id: {account.customer_id}')
             act = CheckingAccount(account.customer_id)
             act.insert_account()
             act.make_deposit(deposit)
-            print(f'Current balance: {act.balance}')
+            print(f'Successfully created checking account. Current balance: {act.balance}')
             return step_2(account)
         else:
             print('Incorrect input')

@@ -58,12 +58,13 @@ def login(email, password, table):
     return customer_vals
 
 
-def check_type(type):
-    if int(type) == 1:
-        return 'SavingsAccount', 
-    elif int(type) == 2:
+def check_type(val):
+    val = int(val)
+    if val == 1:
+        return 'SavingsAccount'
+    elif val == 2:
         return 'CheckingAccount'
-    elif int(type) == 3:
+    elif val == 3:
         return 'Exit'
     return False
     

@@ -2,12 +2,21 @@ from customer import Customer
 from employee import Employee
 from checking import CheckingAccount
 from savings import SavingsAccount
-from insurance import Insurance
-from utilities import new_cust_prompt, new_emp_prompt, login_prompt, login, check_type
+from utilities import new_cust_prompt, new_emp_prompt, login_prompt, login, check_type, print_balances
 
 
-# 1. create customer 2. create employee 3. employeelogin 4. customer login
 def step_1():
+    """First step of the UI, 1. create customer 2. create employee 3. employee login 4. customer login
+
+    Prompts the user to chose what they want to do from the above list of options
+
+    Arguments:
+    Returns:
+        False: if the user selects 5 to exit
+        Step_2(): if the user successfully logs in
+        Step_1(): if the user successfully creates a customer or employee account
+        Step_1(): if the user input is invalid"""
+
     step1 = input('Enter 1 to create a customer account, 2 to create employee account, 3 for customer login, '
                   '4 for employee login, or 5 to Exit: ')
     if step1 == '5':
@@ -30,7 +39,7 @@ def step_1():
         vals = login(creds[0], creds[1], 'Customer')
         if vals:
             cust = Customer(vals[0], vals[1], vals[2], vals[3], vals[4], vals[5])
-            print(f'Succesfully logged in with {cust.email}')
+            print(f'Successfully logged in with {cust.email}')
             return step_2(cust)
         else:
             print('Incorrect email & password')
@@ -40,7 +49,7 @@ def step_1():
         vals = login(creds[0], creds[1], 'Employee')
         if vals:
             emp = Employee(vals[0], vals[1], vals[2], vals[3], vals[4], vals[5])
-            print(f'Succesfully logged in with {emp.email}')
+            print(f'Successfully logged in with {emp.email}')
             return step_2(emp)
         else:
             print('Incorrect email & password')
@@ -61,10 +70,14 @@ def step_2(account):
     elif step2 == '1':
         act_type = input('Enter 1 for savings, 2 for checking, or 3 to return to previous menu: ')
         act_type = check_type(act_type)
-        if act_type == 'Savings':
-            pass
-        elif act_type == 'Checking':
-            pass
+        if act_type == 'SavingsAccount':
+            balances = account.check_savings_balance()
+            print_balances(balances)
+            return step_2(account)
+        elif act_type == 'CheckingAccount':
+            balances = account.check_checking_balance()
+            print_balances(balances)
+            return step_2(account)
         elif act_type == 'Exit':
             return step_2(account)
         else:

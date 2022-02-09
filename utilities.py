@@ -10,7 +10,7 @@ def new_cust_prompt():
     email = input('Enter email address: ')
     password = input('Enter password: ')
     social = input('Enter social: ')
-    return (f_name, l_name, email, password, social)
+    return f_name, l_name, email, password, social
 
 
 def new_emp_prompt():
@@ -21,13 +21,13 @@ def new_emp_prompt():
     department = input('Enter department: ')
     salary = input('Enter salary: ')
     social = input('Enter social: ')
-    return (f_name, l_name, email, password, department, salary, social)
+    return f_name, l_name, email, password, department, salary, social
 
 
 def login_prompt():
     email = input('Enter email: ')
     password = input('Enter password: ')
-    return (email, password)
+    return email, password
 
 
 def login(email, password, table):
@@ -67,4 +67,9 @@ def check_type(val):
     elif val == 3:
         return 'Exit'
     return False
+
+
+def print_balances(balances):
+    for acnt_num, balance in balances:
+        print(f'Account number: {acnt_num} \nBalance: {balance} \n ---------------------')
     

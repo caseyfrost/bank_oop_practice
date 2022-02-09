@@ -45,3 +45,83 @@ class Customer(User):
         self.customer_id = customer_id
 
         return self.customer_id
+
+    def check_checking_balance(self):
+        """Checks the user's balance in the database.
+
+        Args:
+        Returns:
+            array of account balances.
+        Raises:
+            postgres errors"""
+
+        """ Select all savings account balances for customer_id """
+        sql = """
+              SELECT account_number, balance
+              FROM "CheckingAccount"
+              WHERE customer_id = %s;
+              """
+        conn = None
+        balance = None
+        try:
+            # read database configuration
+            params = config()
+            # connect to the PostgreSQL database
+            conn = psycopg2.connect(**params)
+            # create a new cursor
+            cur = conn.cursor()
+            # execute the INSERT statement
+            cur.execute(sql, str(self.customer_id))
+            # get the generated id back
+            balance = cur.fetchall()
+            # commit the changes to the database
+            conn.commit()
+            # close communication with the database
+            cur.close()
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+        finally:
+            if conn is not None:
+                conn.close()
+
+        return balance
+
+    def check_savings_balance(self):
+        """Checks the user's balance in the database.
+
+        Args:
+        Returns:
+            array of account balances.
+        Raises:
+            postgres errors"""
+
+        """ Select all savings account balances for customer_id """
+        sql = """
+              SELECT account_number, balance
+              FROM "SavingsAccount"
+              WHERE customer_id = %s;
+              """
+        conn = None
+        balance = None
+        try:
+            # read database configuration
+            params = config()
+            # connect to the PostgreSQL database
+            conn = psycopg2.connect(**params)
+            # create a new cursor
+            cur = conn.cursor()
+            # execute the INSERT statement
+            cur.execute(sql, str(self.customer_id))
+            # get the generated id back
+            balance = cur.fetchall()
+            # commit the changes to the database
+            conn.commit()
+            # close communication with the database
+            cur.close()
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+        finally:
+            if conn is not None:
+                conn.close()
+
+        return balance

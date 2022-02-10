@@ -15,6 +15,9 @@ class CheckingAccount(Account):
         self.card_number = card_number
         self.overdraft_fee = overdraft_fee
         self.customer_id = customer_id
+        self.balance = balance
+        self.interest_rate = interest_rate
+        self.account_number = account_number
 
     def debit_purchase(self, amount):
         """Reduces balance by amount and checks for overdraft

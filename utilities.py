@@ -1,7 +1,5 @@
 import psycopg2
 from config import config
-from checking import CheckingAccount
-from savings import SavingsAccount
 
 
 def new_cust_prompt():
@@ -28,6 +26,21 @@ def login_prompt():
     email = input('Enter email: ')
     password = input('Enter password: ')
     return email, password
+
+
+def act_typ_prmpt():
+    act_type = input('Enter 1 for savings, 2 for checking, or 3 to return to previous menu: ')
+    return act_type
+
+
+def dep_type_prmpt():
+    dep_type = input('Enter 1 for deposit, 2 for withdrawal, or 3 to return to previous menu: ')
+    return dep_type
+
+
+def act_num_prmpt():
+    act_num = input('Enter account number: ')
+    return act_num
 
 
 def login(email, password, table):
@@ -59,17 +72,29 @@ def login(email, password, table):
 
 
 def check_type(val):
-    val = int(val)
-    if val == 1:
+    if val == '1':
         return 'SavingsAccount'
-    elif val == 2:
+    elif val == '2':
         return 'CheckingAccount'
-    elif val == 3:
+    elif val == '3':
         return 'Exit'
-    return False
+    else:
+        return False
+
+
+def check_dep_type(val):
+    if val == '1':
+        return 'Deposit'
+    elif val == '2':
+        return 'Withdrawal'
+    elif val == '3':
+        return 'Exit'
+    else:
+        return False
 
 
 def print_balances(balances):
+    print('---------------------')
     for acnt_num, balance in balances:
         print(f'Account number: {acnt_num} \nBalance: {balance} \n ---------------------')
     

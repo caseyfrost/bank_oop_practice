@@ -99,7 +99,7 @@ class SavingsAccount(Account):
         else:
             return False
 
-    def get_balance(self):
+    def set_balance(self):
         """Set the objects balance property by querying the database.
 
         Args:
@@ -154,7 +154,7 @@ class SavingsAccount(Account):
             self.balance += amount
             """ Update the balance for the customer id in the CheckingAccount table """
             sql = """UPDATE "SavingsAccount"
-                  SET balance = balance + %s
+                  SET balance = balance - %s
                   WHERE customer_id = %s
                   AND account_number = %s;
                   SELECT balance

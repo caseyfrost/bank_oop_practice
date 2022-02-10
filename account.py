@@ -21,52 +21,6 @@ class Account:
         self.account_number = account_number
         self.customer_id = customer_id
 
-    def withdraw(self, amount, table):
-        """Reduces the account balance by amount.
-
-        Args:
-            amount: int or float to withdraw.
-
-        Returns:
-            bool True if completes successfully.
-
-        Raises:
-            ValueError if amount is not a positive number."""
-
-        if self.check_num_pos(amount):
-            self.balance -= amount
-            """ insert a new account into the CheckingAccount table """
-            sql = f"""INSERT INTO "{table}"(customer_id)
-                    VALUES(%s) RETURNING id;"""
-            conn = None
-            customer_id = None
-            try:
-                # read database configuration
-                params = config()
-                # connect to the PostgreSQL database
-                conn = psycopg2.connect(**params)
-                # create a new cursor
-                cur = conn.cursor()
-                # execute the INSERT statement
-                cur.execute(sql, (self.customer_id))
-                # get the generated id back
-                customer_id = cur.fetchone()[0]
-                # commit the changes to the database
-                conn.commit()
-                # close communication with the database
-                cur.close()
-            except (Exception, psycopg2.DatabaseError) as error:
-                print(error)
-            finally:
-                if conn is not None:
-                    conn.close()
-
-            self.customer_id = customer_id
-
-            return self.customer_id
-        else:
-            raise ValueError('Withdrawal amount must be a positive number')
-
     def print_balance(self):
         return f"The current account balance is: {self.balance}"
 

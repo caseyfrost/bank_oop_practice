@@ -2,7 +2,7 @@ from customer import Customer
 from employee import Employee
 from checking import CheckingAccount
 from savings import SavingsAccount
-from utilities import new_cust_prompt, new_emp_prompt, login_prompt, login, check_type, print_balances, act_typ_prmpt,\
+from utilities import new_cust_prompt, new_emp_prompt, login_prompt, login, check_type, print_balances, act_typ_prmpt, \
     dep_type_prmpt, check_dep_type, act_num_prmpt
 
 
@@ -60,8 +60,9 @@ def step_1():
         return step_1()
 
 
-# 5. open savings/checking/insurance 6. make debit purchase 8. file insurance claim 9. check balances
 def step_2(account):
+    """5. open savings/checking/insurance 6. make debit purchase 8. file insurance claim 9. check balances"""
+
     step2 = input('Enter 1 to check your balances, 2 to open an account, 3 to make a deposit/withdrawal, '
                   '4 for insurance matters, 5 to return to the first menu, or 6 to exit: ')
     if step2 == '6':
@@ -117,23 +118,32 @@ def step_2(account):
             return step_2(account)
         act_num = act_num_prmpt()
         amt = input('Enter amount: ')
-        if act_type == 'SavingsAccount' and dep_type == 'Deposit':
+        if act_type == 'SavingsAccount':
             act = SavingsAccount(customer_id=account.customer_id, account_number=act_num)
-            print(f'Customer id: {act.customer_id} Account Number: {act.account_number}')
-            act.make_deposit(amt)
-            print(f'Successfully deposited {amt} into savings account {act.account_number}. Current balance: '
-                  f'{act.balance}')
-            return step_2(account)
-        elif act_type == 'SavingsAccount' and dep_type == 'Withdrawal':
-            pass
-        elif act_type == 'CheckingAccount' and dep_type == 'Deposit':
-            act = SavingsAccount(customer_id=account.customer_id, account_number=act_num)
-            act.make_deposit(amt)
-            print(f'Successfully deposited {amt} into checking account {act.account_number}. Current balance: '
-                  f'{act.balance}')
-            return step_2(account)
-        elif act_type == 'CheckingAccount' and dep_type == 'Withdrawal':
-            pass
+            if dep_type == 'Deposit':
+                act.make_deposit(amt)
+                print(f'Successfully deposited {amt} into savings account {act.account_number}. Current balance: '
+                      f'{act.balance}')
+                return step_2(account)
+            else:
+                act.set_balance()
+                act.make_withdrawal(amt)
+                print(f'Successfully withdrew {amt} from savings account {act.account_number}. Current balance: '
+                      f'{act.balance}')
+                return step_2(account)
+        elif act_type == 'CheckingAccount':
+            act = CheckingAccount(customer_id=account.customer_id, account_number=act_num)
+            if dep_type == 'Deposit':
+                act.make_deposit(amt)
+                print(f'Successfully deposited {amt} into checking account {act.account_number}. Current balance: '
+                      f'{act.balance}')
+                return step_2(account)
+            else:
+                act.set_balance()
+                act.make_withdrawal(amt)
+                print(f'Successfully withdrew {amt} from checking account {act.account_number}. Current balance: '
+                      f'{act.balance}')
+                return step_2(account)
         else:
             print('Incorrect input')
             return step_2(account)
